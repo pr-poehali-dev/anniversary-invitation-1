@@ -25,12 +25,23 @@ def handler(event: dict, context) -> dict:
     attend = body.get('attend', '')
     drinks = body.get('drinks', [])
     dish = body.get('dish', '')
+    comment = body.get('comment', '')
 
     attend_text = 'Да, буду' if attend == 'yes' else 'Не смогу'
     dish_text = {'meat': 'Мясо', 'fish': 'Рыба'}.get(dish, '—')
     drinks_text = ', '.join(drinks) if drinks else '—'
 
     subject = f'RSVP: {name} — {"придёт" if attend == "yes" else "не придёт"}'
+
+    comment_block = ''
+    if comment:
+        comment_block = f'''
+        <tr>
+          <td colspan="2" style="padding: 16px 0 0;">
+            <p style="color: #888; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin: 0 0 8px;">Комментарий</p>
+            <p style="color: #e8e8e8; font-size: 16px; line-height: 1.6; margin: 0;">{comment.replace(chr(10), '<br>')}</p>
+          </td>
+        </tr>'''
 
     html = f"""
     <div style="font-family: Georgia, serif; max-width: 560px; margin: 0 auto; background: #0f0f0f; color: #d4d4d4; padding: 40px;">
@@ -46,9 +57,10 @@ def handler(event: dict, context) -> dict:
           <td style="padding: 12px 0; border-bottom: 1px solid #222; color: #e8e8e8; font-size: 16px; text-align: right;">{dish_text}</td>
         </tr>
         <tr>
-          <td style="padding: 12px 0; color: #888; font-size: 11px; letter-spacing: 2px; text-transform: uppercase;">Напитки</td>
-          <td style="padding: 12px 0; color: #e8e8e8; font-size: 16px; text-align: right;">{drinks_text}</td>
+          <td style="padding: 12px 0; border-bottom: 1px solid #222; color: #888; font-size: 11px; letter-spacing: 2px; text-transform: uppercase;">Напитки</td>
+          <td style="padding: 12px 0; border-bottom: 1px solid #222; color: #e8e8e8; font-size: 16px; text-align: right;">{drinks_text}</td>
         </tr>
+        {comment_block}
       </table>
       <p style="margin-top: 40px; font-size: 10px; color: #444; letter-spacing: 3px; text-transform: uppercase;">26 сентября 2026 · Премьер холл</p>
     </div>
