@@ -320,13 +320,14 @@ const CSS = `
   .submit-btn:hover { border-color: #888; color: #fff; background: #161616; }
 
   .form-msg {
-    margin-top: 18px;
+    margin-top: 24px;
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 18px;
-    color: #999;
+    font-size: clamp(26px, 3vw, 36px);
+    color: #e8e8e8;
     text-align: center;
-    min-height: 28px;
+    min-height: 44px;
+    line-height: 1.4;
   }
 
   /* GALLERY */
