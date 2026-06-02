@@ -9,7 +9,7 @@ const DRINKS = ["Водка", "Коньяк", "Белое полусладкое
 const RSVP_URL = "https://functions.poehali.dev/8dc374e8-ff5e-4699-a6c6-6a74c28f8e91";
 
 const CSS = `
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@500;600;700&family=Montserrat:wght@300;400;500&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { background: #0a0a0a; }
@@ -96,57 +96,57 @@ const CSS = `
   /* BLOCK 1 */
   .b1-label {
     font-family: 'Montserrat', sans-serif;
-    font-weight: 200;
-    font-size: 11px;
-    letter-spacing: 7px;
-    color: #999;
+    font-weight: 300;
+    font-size: 12px;
+    letter-spacing: 6px;
+    color: #bbb;
     text-transform: uppercase;
     margin-bottom: 32px;
   }
 
   .b1-names {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
+    font-family: 'Dancing Script', cursive;
+    font-weight: 600;
     font-size: clamp(72px, 9vw, 118px);
-    line-height: 0.88;
-    color: #e8e8e8;
-    letter-spacing: -2px;
+    line-height: 1.0;
+    color: #f0ece4;
+    letter-spacing: 1px;
   }
 
   .b1-names span { display: block; }
 
   .b1-amp {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
+    font-family: 'Dancing Script', cursive;
+    font-weight: 500;
     font-size: clamp(36px, 4.5vw, 54px);
-    color: #777;
+    color: #a09070;
     display: block;
-    margin: 10px 0;
+    margin: 4px 0;
   }
 
   .b1-date {
     font-family: 'Montserrat', sans-serif;
-    font-weight: 200;
-    font-size: 12px;
+    font-weight: 300;
+    font-size: 13px;
     letter-spacing: 4px;
-    color: #888;
+    color: #aaa;
     margin-top: 40px;
   }
 
   /* BLOCK 2 */
   .b2-text {
     font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
-    font-size: clamp(19px, 2.1vw, 26px);
-    line-height: 1.75;
-    color: #d8d8d8;
+    font-weight: 400;
+    font-size: clamp(20px, 2.2vw, 28px);
+    line-height: 1.85;
+    color: #e4e4e4;
     font-style: italic;
   }
 
   /* BLOCK 3 */
   .b3-label {
     font-family: 'Montserrat', sans-serif;
-    font-weight: 200;
+    font-weight: 300;
     font-size: 10px;
     letter-spacing: 6px;
     color: #888;
@@ -156,27 +156,27 @@ const CSS = `
 
   .b3-venue {
     font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: clamp(48px, 6.5vw, 86px);
     line-height: 0.95;
-    color: #e8e8e8;
+    color: #f0f0f0;
   }
 
   .b3-address {
     font-family: 'Montserrat', sans-serif;
     font-weight: 300;
-    font-size: 13px;
+    font-size: 14px;
     letter-spacing: 3px;
-    color: #999;
+    color: #bbb;
     margin-top: 18px;
   }
 
   .b3-time {
     font-family: 'Montserrat', sans-serif;
-    font-weight: 200;
-    font-size: 12px;
+    font-weight: 300;
+    font-size: 13px;
     letter-spacing: 3px;
-    color: #888;
+    color: #aaa;
     margin-top: 30px;
     line-height: 2.2;
   }
@@ -184,10 +184,10 @@ const CSS = `
   /* FORM */
   .form-title {
     font-family: 'Montserrat', sans-serif;
-    font-weight: 200;
-    font-size: 10px;
-    letter-spacing: 7px;
-    color: #888;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: #aaa;
     text-transform: uppercase;
     margin-bottom: 40px;
   }
@@ -198,10 +198,10 @@ const CSS = `
 
   .flabel {
     font-family: 'Montserrat', sans-serif;
-    font-weight: 300;
-    font-size: 10px;
+    font-weight: 400;
+    font-size: 11px;
     letter-spacing: 3px;
-    color: #aaa;
+    color: #ccc;
     text-transform: uppercase;
     margin-bottom: 12px;
     display: block;
