@@ -62,9 +62,18 @@ def handler(event: dict, context) -> dict:
 
     smtp_password = os.environ.get('SMTP_PASSWORD', '')
 
-    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
-        server.login('442843@gmail.com', smtp_password)
-        server.sendmail('442843@gmail.com', '442843@gmail.com', msg.as_string())
+    try:
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
+            server.login('442843@gmail.com', smtp_password)
+            server.sendmail('442843@gmail.com', '442843@gmail.com', msg.as_string())
+        print(f'[RSVP] Email sent for: {name}')
+    except Exception as e:
+        print(f'[RSVP] Email error: {e}')
+        return {
+            'statusCode': 500,
+            'headers': {'Access-Control-Allow-Origin': '*'},
+            'body': json.dumps({'ok': False, 'error': str(e)})
+        }
 
     return {
         'statusCode': 200,

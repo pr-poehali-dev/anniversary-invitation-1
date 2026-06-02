@@ -527,7 +527,7 @@ export default function Index() {
   return (
     <div className="inv-wrap" onClick={handlePageClick}>
       <style>{CSS}</style>
-      <audio ref={audioRef} src="https://cdn.pixabay.com/audio/2023/07/26/audio_3e9d4f4e9a.mp3" preload="auto" crossOrigin="anonymous" />
+      <audio ref={audioRef} src="https://cdn.poehali.dev/projects/732a5927-ecea-4a3e-bd07-a4dc7e330d96/bucket/music/wedding.mp3" preload="auto" />
 
       {/* BLOCK 1 */}
       <div className="inv-block reveal">
@@ -542,7 +542,7 @@ export default function Index() {
               <span className="b1-amp">и</span>
               <span>Диана</span>
             </div>
-            <p className="b1-date">26 сентября 2026 · 18:00</p>
+            <p className="b1-date">26 сентября 2026 · 17:00</p>
           </div>
         </div>
       </div>
@@ -577,8 +577,8 @@ export default function Index() {
             <p className="b3-address">Ленина 58</p>
             <div className="b3-time">
               <p>26 сентября 2026</p>
-              <p>Сбор с 17:30</p>
-              <p>Начало в 18:00</p>
+              <p>Сбор с 16:30</p>
+              <p>Начало в 17:00</p>
             </div>
           </div>
         </div>

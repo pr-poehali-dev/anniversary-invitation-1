@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Upload music to S3",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {"ok": true},
+      "bodyMatcher": "partial"
+    }
+  ]
+}
