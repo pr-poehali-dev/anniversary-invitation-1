@@ -221,6 +221,23 @@ const CSS = `
   .finput:focus { border-color: #4a4a4a; }
   .finput.ferr { border-color: #666; }
 
+  .ftextarea {
+    width: 100%;
+    background: #141414;
+    border: 1px solid #252525;
+    color: #d4d4d4;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    padding: 12px 16px;
+    outline: none;
+    transition: border-color 0.3s;
+    resize: vertical;
+    min-height: 110px;
+    line-height: 1.6;
+  }
+  .ftextarea::placeholder { color: #555; font-style: italic; }
+  .ftextarea:focus { border-color: #4a4a4a; }
+
   .rgroup {
     display: flex;
     gap: 10px;
@@ -453,6 +470,7 @@ export default function Index() {
   const [attend, setAttend] = useState<"yes" | "no" | null>(null);
   const [drinks, setDrinks] = useState<string[]>([]);
   const [dish, setDish] = useState<"meat" | "fish" | null>(null);
+  const [comment, setComment] = useState("");
   const [formMsg, setFormMsg] = useState("");
   const [errors, setErrors] = useState<{ name?: boolean; attend?: boolean; dish?: boolean }>({});
 
@@ -506,7 +524,7 @@ export default function Index() {
     setErrors(errs);
     if (Object.keys(errs).length > 0) return;
 
-    const data = { name: name.trim(), attend, drinks, dish };
+    const data = { name: name.trim(), attend, drinks, dish, comment: comment.trim() };
     localStorage.setItem("wedding_rsvp", JSON.stringify(data));
 
     const msg = attend === "yes"
@@ -644,6 +662,16 @@ export default function Index() {
                   </button>
                 ))}
               </div>
+            </div>
+
+            <div className="fgroup">
+              <label className="flabel">Комментарий</label>
+              <textarea
+                className="ftextarea"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                placeholder="Если Вы идете с парой или с семьей, напишите все имена и фамилии, а так же пожелания по меню. Вы очень нам поможете."
+              />
             </div>
 
             <button className="submit-btn" onClick={(e) => { e.stopPropagation(); handleSubmit(); }}>
