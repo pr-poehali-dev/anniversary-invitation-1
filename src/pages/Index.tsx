@@ -9,7 +9,7 @@ const DRINKS = ["Водка", "Коньяк", "Белое полусладкое
 const RSVP_URL = "https://functions.poehali.dev/8dc374e8-ff5e-4699-a6c6-6a74c28f8e91";
 
 const CSS = `
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { background: #0a0a0a; }
@@ -105,23 +105,23 @@ const CSS = `
   }
 
   .b1-names {
-    font-family: 'Great Vibes', cursive;
-    font-weight: 400;
-    font-size: clamp(80px, 10vw, 130px);
-    line-height: 1.05;
-    color: #f0ece4;
-    letter-spacing: 2px;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(72px, 9vw, 118px);
+    line-height: 0.88;
+    color: #e8e8e8;
+    letter-spacing: -2px;
   }
 
   .b1-names span { display: block; }
 
   .b1-amp {
-    font-family: 'Great Vibes', cursive;
-    font-weight: 400;
-    font-size: clamp(40px, 5vw, 60px);
-    color: #a09070;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(36px, 4.5vw, 54px);
+    color: #777;
     display: block;
-    margin: 4px 0;
+    margin: 10px 0;
   }
 
   .b1-date {
