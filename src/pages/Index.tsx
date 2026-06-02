@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 
 const PHOTO = "https://cdn.poehali.dev/projects/732a5927-ecea-4a3e-bd07-a4dc7e330d96/bucket/3cc0e8e3-7b8c-44f8-8441-13bfadc4f981.jpg";
-const GALLERY1 = "https://cdn.poehali.dev/projects/732a5927-ecea-4a3e-bd07-a4dc7e330d96/bucket/816567d8-b6b1-4477-8a99-068db1ebff4f.jpg";
+const GALLERY1 = "https://cdn.poehali.dev/projects/732a5927-ecea-4a3e-bd07-a4dc7e330d96/bucket/eefccef9-6513-4080-b40e-598408cfde6f.jpg";
 const GALLERY2 = "https://cdn.poehali.dev/projects/732a5927-ecea-4a3e-bd07-a4dc7e330d96/bucket/5980fdfc-aa0c-48e1-963c-389b3ddcb3af.jpg";
 const GALLERY3 = "https://cdn.poehali.dev/projects/732a5927-ecea-4a3e-bd07-a4dc7e330d96/bucket/210dc531-e506-4b39-9d04-37a1a6c4ddf7.jpg";
 
 const DRINKS = ["Водка", "Коньяк", "Белое полусладкое", "Красное полусладкое"];
+const RSVP_URL = "https://functions.poehali.dev/8dc374e8-ff5e-4699-a6c6-6a74c28f8e91";
 
 const CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400&display=swap');
@@ -98,7 +99,7 @@ const CSS = `
     font-weight: 200;
     font-size: 11px;
     letter-spacing: 7px;
-    color: #777;
+    color: #999;
     text-transform: uppercase;
     margin-bottom: 32px;
   }
@@ -118,7 +119,7 @@ const CSS = `
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: clamp(36px, 4.5vw, 54px);
-    color: #555;
+    color: #777;
     display: block;
     margin: 10px 0;
   }
@@ -128,7 +129,7 @@ const CSS = `
     font-weight: 200;
     font-size: 12px;
     letter-spacing: 4px;
-    color: #666;
+    color: #888;
     margin-top: 40px;
   }
 
@@ -138,7 +139,7 @@ const CSS = `
     font-weight: 300;
     font-size: clamp(19px, 2.1vw, 26px);
     line-height: 1.75;
-    color: #bbb;
+    color: #d8d8d8;
     font-style: italic;
   }
 
@@ -148,7 +149,7 @@ const CSS = `
     font-weight: 200;
     font-size: 10px;
     letter-spacing: 6px;
-    color: #555;
+    color: #888;
     text-transform: uppercase;
     margin-bottom: 28px;
   }
@@ -166,7 +167,7 @@ const CSS = `
     font-weight: 300;
     font-size: 13px;
     letter-spacing: 3px;
-    color: #666;
+    color: #999;
     margin-top: 18px;
   }
 
@@ -175,7 +176,7 @@ const CSS = `
     font-weight: 200;
     font-size: 12px;
     letter-spacing: 3px;
-    color: #555;
+    color: #888;
     margin-top: 30px;
     line-height: 2.2;
   }
@@ -186,7 +187,7 @@ const CSS = `
     font-weight: 200;
     font-size: 10px;
     letter-spacing: 7px;
-    color: #555;
+    color: #888;
     text-transform: uppercase;
     margin-bottom: 40px;
   }
@@ -200,7 +201,7 @@ const CSS = `
     font-weight: 300;
     font-size: 10px;
     letter-spacing: 3px;
-    color: #777;
+    color: #aaa;
     text-transform: uppercase;
     margin-bottom: 12px;
     display: block;
@@ -229,9 +230,9 @@ const CSS = `
   .rbtn {
     cursor: pointer;
     padding: 10px 22px;
-    border: 1px solid #252525;
+    border: 1px solid #333;
     background: transparent;
-    color: #777;
+    color: #aaa;
     font-family: 'Montserrat', sans-serif;
     font-weight: 300;
     font-size: 10px;
@@ -239,9 +240,9 @@ const CSS = `
     text-transform: uppercase;
     transition: all 0.25s;
   }
-  .rbtn:hover { border-color: #4a4a4a; color: #ccc; }
-  .rbtn.ract { border-color: #999; color: #e8e8e8; background: #1a1a1a; }
-  .rbtn.rerr { border-color: #555; }
+  .rbtn:hover { border-color: #666; color: #ddd; }
+  .rbtn.ract { border-color: #bbb; color: #f0f0f0; background: #1a1a1a; }
+  .rbtn.rerr { border-color: #666; }
 
   .cklist {
     display: flex;
@@ -505,14 +506,20 @@ export default function Index() {
     setErrors(errs);
     if (Object.keys(errs).length > 0) return;
 
-    localStorage.setItem("wedding_rsvp", JSON.stringify({ name: name.trim(), attend, drinks, dish }));
+    const data = { name: name.trim(), attend, drinks, dish };
+    localStorage.setItem("wedding_rsvp", JSON.stringify(data));
 
-    setFormMsg(
-      attend === "yes"
-        ? `${name.trim()}, спасибо, ждём!`
-        : `${name.trim()}, жаль, увидимся в другой раз.`
-    );
+    const msg = attend === "yes"
+      ? `${name.trim()}, спасибо, ждём!`
+      : `${name.trim()}, жаль, увидимся в другой раз.`;
+    setFormMsg(msg);
     setTimeout(() => setFormMsg(""), 4000);
+
+    fetch(RSVP_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    }).catch(() => null);
   };
 
   const photos = [PHOTO, GALLERY1, GALLERY2, GALLERY3];
@@ -520,7 +527,7 @@ export default function Index() {
   return (
     <div className="inv-wrap" onClick={handlePageClick}>
       <style>{CSS}</style>
-      <audio ref={audioRef} src="/music.mp3" preload="auto" />
+      <audio ref={audioRef} src="https://cdn.pixabay.com/audio/2023/07/26/audio_3e9d4f4e9a.mp3" preload="auto" crossOrigin="anonymous" />
 
       {/* BLOCK 1 */}
       <div className="inv-block reveal">
@@ -548,11 +555,11 @@ export default function Index() {
         <div className="inv-text">
           <div className="inv-text-inner">
             <p className="b2-text">
-              Десять лет назад мы не знали, какими будем.<br /><br />
-              Было всякое: дни, когда мы говорили на разных языках, ночи, когда тишина казалась громче слов.<br /><br />
-              Но был и другой счёт прожитых дней. Тех, где рука находила руку без слов.<br /><br />
-              Мы не стали идеальными, мы стали настоящими.<br /><br />
-              26 сентября мы просто хотим быть рядом с теми, кто был рядом с нами.
+              Десять лет назад мы сказали «Да», глядя друг другу в глаза. Мы не знали, как повернётся жизнь.<br /><br />
+              Были моменты, когда нам было тяжело. Мы спорили, ошибались, иногда казалось, что мы идём разными дорогами. Но именно в этих испытаниях мы научились ценить то, что имеем.<br /><br />
+              Мы выбирали друг друга. Снова и снова.<br /><br />
+              Эти годы научили нас главному — любить не только в радости, но и в преодолении. Мы стали одной семьёй, одним целым.<br /><br />
+              26 сентября мы просто хотим быть рядом с теми, кто проходил этот путь с нами. Вы для нас важны.
             </p>
           </div>
         </div>

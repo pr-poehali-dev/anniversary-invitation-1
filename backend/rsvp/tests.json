@@ -1,0 +1,18 @@
+{
+  "tests": [
+    {
+      "name": "RSVP — attending yes",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "name": "Иван Петров",
+        "attend": "yes",
+        "drinks": ["Водка", "Коньяк"],
+        "dish": "meat"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {"ok": true},
+      "bodyMatcher": "string_contains"
+    }
+  ]
+}
