@@ -407,6 +407,71 @@ const CSS = `
   }
   .music-btn:hover { border-color: #555; color: #ccc; }
 
+  /* TIMER */
+  .timer-block {
+    width: 100%;
+    background: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px;
+  }
+
+  .timer-inner {
+    text-align: center;
+  }
+
+  .timer-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: #666;
+    text-transform: uppercase;
+    margin-bottom: 48px;
+  }
+
+  .timer-units {
+    display: flex;
+    gap: 48px;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .timer-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .timer-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(56px, 8vw, 100px);
+    line-height: 1;
+    color: #e8e8e8;
+    min-width: 2ch;
+    text-align: center;
+  }
+
+  .timer-unit-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: #555;
+    text-transform: uppercase;
+  }
+
+  .timer-sep {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 5vw, 70px);
+    color: #333;
+    line-height: 1;
+    margin-top: 4px;
+  }
+
   /* RESPONSIVE */
   @media (max-width: 900px) {
     .inv-block, .inv-block.rev {
@@ -450,6 +515,24 @@ const CSS = `
   }
 `;
 
+function useCountdown(target: Date) {
+  const calc = () => {
+    const diff = target.getTime() - Date.now();
+    if (diff <= 0) return { d: 0, h: 0, m: 0, s: 0 };
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    return { d, h, m, s };
+  };
+  const [time, setTime] = useState(calc);
+  useEffect(() => {
+    const t = setInterval(() => setTime(calc()), 1000);
+    return () => clearInterval(t);
+  }, []);
+  return time;
+}
+
 function useReveal() {
   useEffect(() => {
     const els = document.querySelectorAll(".reveal");
@@ -474,6 +557,7 @@ export default function Index() {
   const [comment, setComment] = useState("");
   const [formMsg, setFormMsg] = useState("");
   const [errors, setErrors] = useState<{ name?: boolean; attend?: boolean; dish?: boolean }>({});
+  const countdown = useCountdown(new Date('2026-09-26T17:00:00'));
 
   useReveal();
 
@@ -598,6 +682,34 @@ export default function Index() {
               <p>26 сентября 2026</p>
               <p>Сбор с 16:30</p>
               <p>Начало в 17:00</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* TIMER */}
+      <div className="timer-block reveal">
+        <div className="timer-inner">
+          <p className="timer-label">До праздника осталось</p>
+          <div className="timer-units">
+            <div className="timer-unit">
+              <span className="timer-num">{String(countdown.d).padStart(2, '0')}</span>
+              <span className="timer-unit-label">дней</span>
+            </div>
+            <span className="timer-sep">·</span>
+            <div className="timer-unit">
+              <span className="timer-num">{String(countdown.h).padStart(2, '0')}</span>
+              <span className="timer-unit-label">часов</span>
+            </div>
+            <span className="timer-sep">·</span>
+            <div className="timer-unit">
+              <span className="timer-num">{String(countdown.m).padStart(2, '0')}</span>
+              <span className="timer-unit-label">минут</span>
+            </div>
+            <span className="timer-sep">·</span>
+            <div className="timer-unit">
+              <span className="timer-num">{String(countdown.s).padStart(2, '0')}</span>
+              <span className="timer-unit-label">секунд</span>
             </div>
           </div>
         </div>
