@@ -527,7 +527,7 @@ export default function Index() {
   return (
     <div className="inv-wrap" onClick={handlePageClick}>
       <style>{CSS}</style>
-      <audio ref={audioRef} src="https://cdn.poehali.dev/projects/732a5927-ecea-4a3e-bd07-a4dc7e330d96/bucket/music/wedding.mp3" preload="auto" />
+      <audio ref={audioRef} src="https://cdn.poehali.dev/projects/732a5927-ecea-4a3e-bd07-a4dc7e330d96/bucket/1d56ffcc-3c79-478f-8887-1bbed9824933.mp3" preload="auto" />
 
       {/* BLOCK 1 */}
       <div className="inv-block reveal">
