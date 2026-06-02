@@ -5,7 +5,7 @@ const GALLERY1 = "https://cdn.poehali.dev/projects/732a5927-ecea-4a3e-bd07-a4dc7
 const GALLERY2 = "https://cdn.poehali.dev/projects/732a5927-ecea-4a3e-bd07-a4dc7e330d96/bucket/5980fdfc-aa0c-48e1-963c-389b3ddcb3af.jpg";
 const GALLERY3 = "https://cdn.poehali.dev/projects/732a5927-ecea-4a3e-bd07-a4dc7e330d96/bucket/210dc531-e506-4b39-9d04-37a1a6c4ddf7.jpg";
 
-const DRINKS = ["Водка", "Коньяк", "Белое полусладкое", "Красное полусладкое"];
+const DRINKS = ["Водка", "Коньяк", "Белое полусладкое", "Красное полусладкое", "Безалкогольные напитки"];
 const RSVP_URL = "https://functions.poehali.dev/8dc374e8-ff5e-4699-a6c6-6a74c28f8e91";
 
 const CSS = `
@@ -609,6 +609,7 @@ export default function Index() {
         </div>
         <div className="inv-b4-col">
           <div className="inv-b4-inner">
+            <p className="b2-text" style={{marginBottom: '40px', fontStyle: 'normal', fontSize: 'clamp(15px, 1.6vw, 20px)', color: '#bbb'}}>Будем очень признательны, если Вы сообщите нам о своём решении до&nbsp;12.09.26г.</p>
             <p className="form-title">Подтверждение</p>
 
             <div className="fgroup">
